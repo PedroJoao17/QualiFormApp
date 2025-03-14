@@ -2,7 +2,7 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { router } from "expo-router";
 
 export default function Index() {
-    
+
 
     return (
         <View style={style.container}>
@@ -11,6 +11,10 @@ export default function Index() {
 
             <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/enviarForm")}>
                 <Text style={style.text}>Enviar Formulários</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/fillForm")}>
+                <Text style={style.text}>Validar Formulários</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/aprovForm")}>

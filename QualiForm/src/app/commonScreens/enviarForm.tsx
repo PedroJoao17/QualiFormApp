@@ -107,7 +107,6 @@ const style = StyleSheet.create({
 
     scrollContent: {
         alignItems: "center",
-        paddingBottom: 20, // Evita corte no final da lista
     },
 
     button: {

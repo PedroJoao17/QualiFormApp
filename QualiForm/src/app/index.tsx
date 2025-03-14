@@ -17,13 +17,17 @@ export default function Index() {
     };
 
     const handleLogin = () => {
-        // CPF e Senha corretos para autenticação
-        const cpfCorreto = "123.456.789-00";
-        const senhaCorreta = "admin123";
+        const usuarios = [
+            { cpf: "123.456.789-00", senha: "admin123", rota: "/userAdmin" },  // Admin
+            { cpf: "987.654.321-00", senha: "user123", rota: "/userCommon" } // Usuário comum
+        ];
 
-        if (cpf === cpfCorreto && senha === senhaCorreta) {
-            // Se correto, navega para outra tela
-            router.navigate('/userCommon'); // Troque "Home" pelo nome da tela desejada
+        // Verificando o CPF e a senha
+        const usuarioEncontrado = usuarios.find(usuario => usuario.cpf === cpf && usuario.senha === senha);
+
+        if (usuarioEncontrado) {
+            // Se encontrado, navega para a rota correspondente
+            router.push(usuarioEncontrado.rota); // Usando 'push' para navegar corretamente
         } else {
             Alert.alert("Erro", "CPF ou senha incorretos!");
         }
