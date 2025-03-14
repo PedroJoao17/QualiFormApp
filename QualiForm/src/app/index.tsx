@@ -1,40 +1,73 @@
-import { View, StyleSheet, Image, TextInput, Text, Linking, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { View, StyleSheet, Image, TextInput, Text, Linking, TouchableOpacity, Alert } from "react-native";
+import { router } from "expo-router";
 
 export default function Index() {
+    
+    const [cpf, setCpf] = useState("");
+    const [senha, setSenha] = useState("");
 
-    const handleEmail = function () {
+    const handleEmail = () => {
         const email = 'suporte.ti@grupofacilitti.com.br';
         const subject = 'Problema com o Login';
         const body = '';
         const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         Linking.openURL(url).catch(err => console.error('Erro ao tentar abrir o e-mail', err));
-    }
+    };
+
+    const handleLogin = () => {
+        // CPF e Senha corretos para autenticação
+        const cpfCorreto = "123.456.789-00";
+        const senhaCorreta = "admin123";
+
+        if (cpf === cpfCorreto && senha === senhaCorreta) {
+            // Se correto, navega para outra tela
+            router.navigate('/userCommon'); // Troque "Home" pelo nome da tela desejada
+        } else {
+            Alert.alert("Erro", "CPF ou senha incorretos!");
+        }
+    };
 
     return (
         <View style={style.container}>
             <Image source={require('@/assets/images/nutrik-logo.png')} style={style.img} />
 
-            <TextInput style={style.input} placeholder="Digite o CPF" />
-            <TextInput style={style.input} placeholder="Digite a senha" />
+            <TextInput 
+                style={style.input} 
+                placeholder="Digite o CPF"
+                keyboardType="numeric"
+                value={cpf}
+                onChangeText={setCpf}
+            />
+            
+            <TextInput 
+                style={style.input} 
+                placeholder="Digite a senha" 
+                secureTextEntry
+                value={senha}
+                onChangeText={setSenha}
+            />
+
+            <TouchableOpacity style={style.button} onPress={handleLogin}>
+                <Text style={style.buttonText}>Entrar</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity onPress={handleEmail}>
-                <Text style={style.linkText}>
-                    Fale com o suporte
-                </Text>
+                <Text style={style.linkText}>Fale com o suporte</Text>
             </TouchableOpacity>
         </View>
-    )
+    );
 }
 
 const style = StyleSheet.create({
-
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#660000",
-        flexDirection: 'column', // Alinha os elementos na vertical
-        gap: 15, // Espaço entre os elementos
+        flexDirection: 'column',
+        gap: 15,
         height: "100%",
         overflow: "hidden"
     },
@@ -46,18 +79,34 @@ const style = StyleSheet.create({
     },
 
     input: {
-        width: '80%', // Ajusta a largura dos TextInput
+        width: '80%',
         height: 40,
         backgroundColor: '#FFF',
         borderRadius: 5,
-        marginBottom: 10, // Espaçamento entre os inputs
-        paddingLeft: 10, // Adiciona um pequeno padding no texto
+        marginBottom: 10,
+        paddingLeft: 10,
+    },
+
+    button: {
+        backgroundColor: "#333", // Botão escuro
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 10,
+    },
+
+    buttonText: {
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: "bold",
     },
 
     linkText: {
         color: '#1E90FF',
         fontSize: 18,
         textDecorationLine: 'underline',
+        marginTop: 10,
     },
-
-})
+});

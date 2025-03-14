@@ -1,18 +1,24 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { router } from "expo-router";
 
 export default function Index() {
+    
+
     return (
         <View style={style.container}>
-            <TouchableOpacity style={style.button}>
-                <Text style={style.buttonText}>Enviar Formulários</Text>
+
+            <Text style={style.header}>Menu</Text>
+
+            <TouchableOpacity style={style.button} onPress={() => router.push("/userCommon/enviarForm")}>
+                <Text style={style.text}>Enviar Formulários</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={style.button}>
-                <Text style={style.buttonText}>Formulários Aprovados</Text>
+            <TouchableOpacity style={style.button} onPress={() => router.push("/userCommon/aprovForm")}>
+                <Text style={style.text}>Formulários Aprovados</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={style.button}>
-                <Text style={style.buttonText}>Formulários Devolvidos</Text>
+            <TouchableOpacity style={style.button} onPress={() => router.push("/userCommon/devForm")}>
+                <Text style={style.text}>Formulários Devolvidos</Text>
             </TouchableOpacity>
         </View>
     );
@@ -24,22 +30,29 @@ const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#660000",
-        flexDirection: 'column', // Alinha os elementos na vertical
-        gap: 15, // Espaço entre os elementos
+        gap: 15,
         height: "100%",
-        overflow: "hidden"
     },
     button: {
-        backgroundColor: "#333", // Cor escura de fundo para o botão
-        paddingVertical: 12, // Espaçamento vertical para o botão
-        paddingHorizontal: 20, // Espaçamento horizontal para o botão
-        borderRadius: 5, // Bordas arredondadas
-        alignItems: "center", // Centraliza o texto dentro do botão
+        backgroundColor: "#333",
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        alignItems: "center",
         justifyContent: "center",
+        width: 300,
     },
-    buttonText: {
-        color: "#FFF", // Cor clara para o texto
+    header: {
+        position: "absolute",
+        top: 20,
+        right: 30,
+        color: "#FFF",
+        fontSize: 32,
+        fontWeight: "bold",
+    },
+    text: {
+        color: "#FFF",
         fontSize: 18,
         fontWeight: "bold",
-    }
+    },
 });
