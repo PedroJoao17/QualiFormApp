@@ -13,7 +13,7 @@ export default function Index() {
                 <Text style={style.text}>Enviar Formulários</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/fillForm")}>
+            <TouchableOpacity style={style.button} onPress={() => router.push("/userAdmin/validate")}>
                 <Text style={style.text}>Validar Formulários</Text>
             </TouchableOpacity>
 

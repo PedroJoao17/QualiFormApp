@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
+import { router } from "expo-router";
 
 export default function Enviar() {
     return (
@@ -15,60 +16,22 @@ export default function Enviar() {
 
             {/* ScrollView para os botões */}
             <ScrollView style={style.scrollContainer} contentContainerStyle={style.scrollContent}>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
+                <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/higieneForm")}>
+                    <Text style={style.text}>CONTROLE DE TEMPERATURA DE EQUIPAMENTOS - CLIMATIZADOS</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
+                    <Text style={style.text}>CRONOGRAMA E REGISTRO DE HIGIENIZAÇÃO - INSTALAÇÕES, EQUIPAMENTOS,
+                        MÓVEIS E UTENSÍLIOS</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
+                    <Text style={style.text}>PCC 03-CONTROLE DE HIGIENIZAÇÃO DE HORTIFRUTIS
+                        MONITORAMENTO DE CONCENTRAÇÃO DE SANITIZANTE (PERIGO QUÍMICO)</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>Formulários</Text>
+                <TouchableOpacity style={style.button} onPress={() => router.push("/commonScreens/amostras")}>
+                    <Text style={style.text}>ANALISE DE AMOSTRAS</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -89,7 +52,7 @@ const style = StyleSheet.create({
         paddingHorizontal: 20,
         marginBottom: 50,
     },
-    
+
     header: {
         color: "#FFF",
         fontSize: 28,
