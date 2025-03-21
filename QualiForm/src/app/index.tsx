@@ -1,116 +1,84 @@
-import { useState } from "react";
-import { View, StyleSheet, Image, TextInput, Text, Linking, TouchableOpacity, Alert } from "react-native";
-import { router } from "expo-router";
+import { useState } from 'react'
+import { View, Text, StyleSheet, Image, TextInput, Button } from "react-native"
+import { useRouter } from 'expo-router';
 
 export default function Index() {
-    
-    const [cpf, setCpf] = useState("");
-    const [senha, setSenha] = useState("");
 
-    const handleEmail = () => {
-        const email = 'suporte.ti@grupofacilitti.com.br';
-        const subject = 'Problema com o Login';
-        const body = '';
-        const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        Linking.openURL(url).catch(err => console.error('Erro ao tentar abrir o e-mail', err));
-    };
+    const [cpf, setCpf] = useState('');
+    const [senha, setSenha] = useState('');
+    const router = useRouter(); // Instancia o roteador
 
     const handleLogin = () => {
-        const usuarios = [
-            { cpf: "123.456.789-00", senha: "admin123", rota: "/userAdmin" },  // Admin
-            { cpf: "987.654.321-00", senha: "user123", rota: "/userCommon" } // Usuário comum
-        ];
-
-        // Verificando o CPF e a senha
-        const usuarioEncontrado = usuarios.find(usuario => usuario.cpf === cpf && usuario.senha === senha);
-
-        if (usuarioEncontrado) {
-            // Se encontrado, navega para a rota correspondente
-            router.push(usuarioEncontrado.rota); // Usando 'push' para navegar corretamente
+        if ((cpf == '123' && senha == 'user@') || (cpf == '456' && senha == 'adm@')) {
+            //vai para o componente menu
+            router.push({ pathname: '/menu/menu', params: { cpf, senha } });
         } else {
-            Alert.alert("Erro", "CPF ou senha incorretos!");
+            alert('Usuario ou senha errados')
         }
-    };
+    }
 
     return (
-        <View style={style.container}>
-            <Image source={require('@/assets/images/nutrik-logo.png')} style={style.img} />
+        <View style={styles.container}>
 
-            <TextInput 
-                style={style.input} 
-                placeholder="Digite o CPF"
-                keyboardType="numeric"
-                value={cpf}
-                onChangeText={setCpf}
-            />
-            
-            <TextInput 
-                style={style.input} 
-                placeholder="Digite a senha" 
-                secureTextEntry
-                value={senha}
-                onChangeText={setSenha}
-            />
+            <Image source={require("../../assets/images/nutrik-logo.png")} style={styles.image} />
 
-            <TouchableOpacity style={style.button} onPress={handleLogin}>
-                <Text style={style.buttonText}>Entrar</Text>
-            </TouchableOpacity>
+            <View style={styles.containerInput}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="CPF"
+                    onChangeText={setCpf}
+                    keyboardType='numeric'
+                />
 
-            <TouchableOpacity onPress={handleEmail}>
-                <Text style={style.linkText}>Fale com o suporte</Text>
-            </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    onChangeText={setSenha}
+                />
+
+                <Button title='Entrar' onPress={handleLogin} />
+            </View>
+
+            <Text style={styles.textLink}>Fale com o suporte</Text>
+
         </View>
-    );
+    )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#660000",
+        backgroundColor: '#800020',
         flexDirection: 'column',
-        gap: 15,
-        height: "100%",
-        overflow: "hidden"
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 15
     },
-
-    img: {
+    image: {
         width: 300,
         height: 300,
-        resizeMode: "contain",
+        resizeMode: "contain", // Ajusta a imagem sem cortar
     },
-
     input: {
-        width: '80%',
         height: 40,
-        backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 5,
+        paddingHorizontal: 10,
         marginBottom: 10,
-        paddingLeft: 10,
-    },
 
-    button: {
-        backgroundColor: "#333", // Botão escuro
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 10,
+        fontSize: 16,
+        color: '#FFF'
     },
-
-    buttonText: {
-        color: "#FFF",
-        fontSize: 18,
-        fontWeight: "bold",
+    containerInput: {
+        gap: 5,
     },
-
-    linkText: {
-        color: '#1E90FF',
-        fontSize: 18,
+    textLink: {
+        fontSize: 12,
+        marginTop: 30,
+        fontStyle: 'italic',
         textDecorationLine: 'underline',
-        marginTop: 10,
-    },
-});
+        color: '#FFF'
+    }
+
+})
