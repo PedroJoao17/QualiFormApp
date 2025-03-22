@@ -11,7 +11,7 @@ export default function Index() {
     const handleLogin = () => {
         if ((cpf == '123' && senha == 'user@') || (cpf == '456' && senha == 'adm@')) {
             //vai para o componente menu
-            router.push({ pathname: '/menu/menu', params: { cpf, senha } });
+            router.push({ pathname: '/screens/menu', params: { cpf, senha } });
         } else {
             alert('Usuario ou senha errados')
         }
@@ -26,6 +26,7 @@ export default function Index() {
                 <TextInput
                     style={styles.input}
                     placeholder="CPF"
+                    placeholderTextColor={"#FFF"}
                     onChangeText={setCpf}
                     keyboardType='numeric'
                 />
@@ -33,6 +34,7 @@ export default function Index() {
                 <TextInput
                     style={styles.input}
                     placeholder="Senha"
+                    placeholderTextColor={"#FFF"}
                     onChangeText={setSenha}
                 />
 
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
+        width: 250,
         borderWidth: 1,
         borderColor: "#ccc",
         borderRadius: 5,
