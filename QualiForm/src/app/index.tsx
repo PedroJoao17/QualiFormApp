@@ -11,7 +11,7 @@ export default function Index() {
     const handleLogin = () => {
         if ((cpf == '123' && senha == 'user@') || (cpf == '456' && senha == 'adm@')) {
             //vai para o componente menu
-            router.push({ pathname: '/screens/menu', params: { cpf, senha } });
+            router.replace({ pathname: '/screens/menu', params: { cpf, senha } });
         } else {
             alert('Usuario ou senha errados')
         }
