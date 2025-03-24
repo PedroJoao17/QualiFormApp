@@ -1,5 +1,6 @@
-import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library'
 
 export default function Aprovados() {
     const formulariosAprovados = [
@@ -11,6 +12,33 @@ export default function Aprovados() {
         { id: '6', nome: 'Formulário 6' },
         { id: '7', nome: 'Formulário 7' },
     ];
+
+    // Função para baixar o PDF
+    const baixarPdf = async (nomeFormulario: string) => {
+        const url = 'https://api-pdf-production.up.railway.app/pdfs'; // URL do PDF
+        const fileUri = `${FileSystem.cacheDirectory}${nomeFormulario}.pdf`; // Caminho temporário
+
+        try {
+            // Baixar o arquivo para o cache do app
+            const { uri } = await FileSystem.downloadAsync(url, fileUri);
+
+            // Solicitar permissão para acessar a mídia
+            const { status } = await MediaLibrary.requestPermissionsAsync();
+            if (status !== 'granted') {
+                Alert.alert('Permissão negada', 'É necessário permitir o acesso ao armazenamento para salvar o arquivo.');
+                return;
+            }
+
+            // Mover o arquivo para a pasta Downloads
+            const asset = await MediaLibrary.createAssetAsync(uri);
+            await MediaLibrary.createAlbumAsync('Download', asset, false);
+
+            Alert.alert('Sucesso', `PDF do ${nomeFormulario} salvo na pasta Downloads!`);
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Erro', 'Falha ao baixar o PDF');
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -25,6 +53,7 @@ export default function Aprovados() {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.botaoBaixar}
+                                onPress={() => baixarPdf(item.nome)}
                             >
                                 <Text style={styles.textoBotao}>Baixar PDF</Text>
                             </TouchableOpacity>
@@ -45,8 +74,8 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     listaContainer: {
-        maxHeight: 350, // Limita a altura visível da lista
-        width: 280, // Ajusta a largura para alinhar os itens
+        maxHeight: 350,
+        width: 280,
     },
     itemContainer: {
         marginBottom: 15,
