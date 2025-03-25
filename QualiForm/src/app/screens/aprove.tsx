@@ -68,14 +68,14 @@ export default function Aprovados() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#800020',
         padding: 20,
         alignItems: 'center',
-        marginTop: 50,
     },
     listaContainer: {
-        maxHeight: 350,
+        maxHeight: 550,
         width: 280,
+        marginTop: 50,
     },
     itemContainer: {
         marginBottom: 15,
