@@ -3,15 +3,13 @@ import { View, Text, StyleSheet, Image, TextInput, Button } from "react-native"
 import { useRouter } from 'expo-router';
 
 export default function Index() {
-
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
     const router = useRouter(); // Instancia o roteador
 
     const handleLogin = () => {
         if ((cpf == '123' && senha == 'user@') || (cpf == '456' && senha == 'adm@')) {
-            //vai para o componente menu
-            router.replace({ pathname: '/screens/menu', params: { cpf, senha } });
+            router.replace({ pathname: '/screens/menu', params: { cpf } });
         } else {
             alert('Usuario ou senha errados')
         }

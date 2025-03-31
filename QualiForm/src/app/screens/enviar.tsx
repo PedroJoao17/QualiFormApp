@@ -1,6 +1,8 @@
+import { router } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 
 export default function Enviar() {
+
     const formulariosAprovados = [
         { id: '1', nome: 'Formulário 1' },
         { id: '2', nome: 'Formulário 2' },
@@ -10,10 +12,6 @@ export default function Enviar() {
         { id: '6', nome: 'Formulário 6' },
         { id: '7', nome: 'Formulário 7' },
     ];
-
-    const handleBaixarPDF = (nomeFormulario: string) => {
-        alert(`Baixando PDF do ${nomeFormulario}`);
-    };
 
     return (
         <View style={styles.container}>
@@ -28,7 +26,7 @@ export default function Enviar() {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.botaoBaixar}
-                                onPress={() => handleBaixarPDF(item.nome)}
+                                onPress={() => router.push("/screens/fill")}
                             >
                                 <Text style={styles.textoBotao}>Criar Formulario</Text>
                             </TouchableOpacity>

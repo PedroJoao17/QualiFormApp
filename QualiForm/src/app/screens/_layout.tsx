@@ -1,18 +1,18 @@
-import { Stack } from "expo-router"
+import { Stack } from "expo-router";
 
 export default function Layout() {
     return (
         <Stack
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: "#800020", // Cor de fundo do header
+                    backgroundColor: "#800020",
                 },
-                headerTintColor: "#FFF", // Cor do texto e dos botões no header
+                headerTintColor: "#FFF",
                 headerTitleStyle: {
-                    fontSize: 20, // Tamanho da fonte do título
-                    fontWeight: "bold", // Deixa o título em negrito
+                    fontSize: 20,
+                    fontWeight: "bold",
                 },
-                headerShadowVisible: false, // Remove a sombra no iOS
+                headerShadowVisible: false,
             }}
         >
             <Stack.Screen name="menu" options={{ title: "Menu" }} />
@@ -20,6 +20,7 @@ export default function Layout() {
             <Stack.Screen name="aprove" options={{ title: "Aprovados" }} />
             <Stack.Screen name="dev" options={{ title: "Devolvidos" }} />
             <Stack.Screen name="validate" options={{ title: "Validar" }} />
+            <Stack.Screen name="fill" options={{ title: "Preencher Formulário" }} />
         </Stack>
-    )
+    );
 }
